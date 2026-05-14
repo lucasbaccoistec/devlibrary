@@ -1,0 +1,33 @@
+{% extends "library/base.html" %}
+
+{% block titulo %}Inicio - DevLibrary{% endblock %}
+
+{% block conteudo %}
+    <h2 style="margin-bottom: 0.5rem;">Todos os Recursos</h2>
+    <p style="color: #94a3b8; margin-bottom: 2rem;">
+        Total: <strong>{{ total }}</strong> recurso{{ total|pluralize }}
+    </p>
+
+    {% if recursos %}
+        <div style="display: grid; gap: 1rem;">
+            {% for recurso in recursos %}
+                <article style="background: #1e293b; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #38bdf8;">
+                    <h3 style="margin-bottom: 0.5rem;">{{ recurso.titulo }}</h3>
+                    <p style="color: #94a3b8; font-size: 0.85rem; margin-bottom: 0.75rem;">
+                        <span style="background: #0ea5e9; color: white; padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.75rem;">
+                            {{ recurso.get_tipo_display }}
+                        </span>
+                        &middot; {{ recurso.tecnologia.nome }}
+                        &middot; por {{ recurso.autor.nome }}
+                        {% if recurso.data_publicacao %}
+                            &middot; {{ recurso.data_publicacao|date:"d/m/Y" }}
+                        {% endif %}
+                    </p>
+                    <p>{{ recurso.descricao|truncatewords:30 }}</p>
+                </article>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>Nao ha recursos disponiveis. Adiciona alguns pelo admin: <a href="/admin/">/admin/</a></p>
+    {% endif %}
+{% endblock %}
