@@ -12,7 +12,11 @@
         <div style="display: grid; gap: 1rem;">
             {% for recurso in recursos %}
                 <article style="background: #1e293b; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #38bdf8;">
-                    <h3 style="margin-bottom: 0.5rem;">{{ recurso.titulo }}</h3>
+                    <h3 style="margin-bottom: 0.5rem;">
+    <a href="{% url 'library:detalhe_recurso' recurso.id %}" style="color: #e2e8f0; text-decoration: none;">
+        {{ recurso.titulo }}
+    </a>
+</h3>
                     <p style="color: #94a3b8; font-size: 0.85rem; margin-bottom: 0.75rem;">
                         <span style="background: #0ea5e9; color: white; padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.75rem;">
                             {{ recurso.get_tipo_display }}
