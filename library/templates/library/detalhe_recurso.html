@@ -15,21 +15,25 @@
         <h2 style="font-size: 2rem; margin-bottom: 1rem;">{{ recurso.titulo }}</h2>
 
         <div style="display: flex; gap: 2rem; flex-wrap: wrap; color: #94a3b8; font-size: 0.9rem; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid #334155;">
-            <div>
-                <strong style="color: #e2e8f0;">Tecnologia:</strong>
-                {{ recurso.tecnologia.nome }}
-            </div>
-            <div>
-                <strong style="color: #e2e8f0;">Autor:</strong>
-                {{ recurso.autor.nome }}
-            </div>
-            {% if recurso.data_publicacao %}
-                <div>
-                    <strong style="color: #e2e8f0;">Data:</strong>
-                    {{ recurso.data_publicacao|date:"d \d\e F \d\e Y" }}
-                </div>
-            {% endif %}
+    <div>
+        <strong style="color: #e2e8f0;">Tecnologia:</strong>
+        <a href="{% url 'library:recursos_por_tecnologia' recurso.tecnologia.id %}" style="color: #38bdf8;">
+            {{ recurso.tecnologia.nome }}
+        </a>
+    </div>
+    <div>
+        <strong style="color: #e2e8f0;">Autor:</strong>
+        <a href="{% url 'library:recursos_por_autor' recurso.autor.id %}" style="color: #38bdf8;">
+            {{ recurso.autor.nome }}
+        </a>
+    </div>
+    {% if recurso.data_publicacao %}
+        <div>
+            <strong style="color: #e2e8f0;">Data:</strong>
+            {{ recurso.data_publicacao|date:"d \d\e F \d\e Y" }}
         </div>
+    {% endif %}
+</div>
 
         <h3 style="font-size: 1.2rem; margin-bottom: 0.75rem; color: #38bdf8;">Descricao</h3>
         <p style="margin-bottom: 2rem; line-height: 1.8;">{{ recurso.descricao }}</p>

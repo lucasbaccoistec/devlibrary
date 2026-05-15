@@ -1,0 +1,50 @@
+{% extends "library/base.html" %}
+
+{% block titulo %}{{ titulo_pagina }} - DevLibrary{% endblock %}
+
+{% block conteudo %}
+    <a href="{% url 'library:pagina_inicial' %}" style="color: #94a3b8; font-size: 0.9rem;">
+        &larr; Voltar a todos os recursos
+    </a>
+
+    <h2 style="margin-top: 1rem; margin-bottom: 0.5rem;">{{ titulo_pagina }}</h2>
+    {% if subtitulo %}
+        <p style="color: #cbd5e1; margin-bottom: 0.5rem;">{{ subtitulo }}</p>
+    {% endif %}
+    <p style="color: #94a3b8; margin-bottom: 2rem;">
+        Total: <strong>{{ total }}</strong> recurso{{ total|pluralize }}
+    </p>
+
+    {% if recursos %}
+        <div style="display: grid; gap: 1rem;">
+            {% for recurso in recursos %}
+                <article style="background: #1e293b; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #38bdf8;">
+                    <h3 style="margin-bottom: 0.5rem;">
+                        <a href="{% url 'library:detalhe_recurso' recurso.id %}" style="color: #e2e8f0; text-decoration: none;">
+                            {{ recurso.titulo }}
+                        </a>
+                    </h3>
+                    <p style="color: #94a3b8; font-size: 0.85rem; margin-bottom: 0.75rem;">
+                        <span style="background: #0ea5e9; color: white; padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.75rem;">
+                            {{ recurso.get_tipo_display }}
+                        </span>
+                        &middot;
+                        <a href="{% url 'library:recursos_por_tecnologia' recurso.tecnologia.id %}" style="color: #38bdf8;">
+                            {{ recurso.tecnologia.nome }}
+                        </a>
+                        &middot; por
+                        <a href="{% url 'library:recursos_por_autor' recurso.autor.id %}" style="color: #38bdf8;">
+                            {{ recurso.autor.nome }}
+                        </a>
+                        {% if recurso.data_publicacao %}
+                            &middot; {{ recurso.data_publicacao|date:"d/m/Y" }}
+                        {% endif %}
+                    </p>
+                    <p>{{ recurso.descricao|truncatewords:30 }}</p>
+                </article>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>Nao ha recursos disponiveis nesta categoria.</p>
+    {% endif %}
+{% endblock %}

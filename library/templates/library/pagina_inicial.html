@@ -18,15 +18,21 @@
     </a>
 </h3>
                     <p style="color: #94a3b8; font-size: 0.85rem; margin-bottom: 0.75rem;">
-                        <span style="background: #0ea5e9; color: white; padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.75rem;">
-                            {{ recurso.get_tipo_display }}
-                        </span>
-                        &middot; {{ recurso.tecnologia.nome }}
-                        &middot; por {{ recurso.autor.nome }}
-                        {% if recurso.data_publicacao %}
-                            &middot; {{ recurso.data_publicacao|date:"d/m/Y" }}
-                        {% endif %}
-                    </p>
+    <span style="background: #0ea5e9; color: white; padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.75rem;">
+        {{ recurso.get_tipo_display }}
+    </span>
+    &middot;
+    <a href="{% url 'library:recursos_por_tecnologia' recurso.tecnologia.id %}" style="color: #38bdf8;">
+        {{ recurso.tecnologia.nome }}
+    </a>
+    &middot; por
+    <a href="{% url 'library:recursos_por_autor' recurso.autor.id %}" style="color: #38bdf8;">
+        {{ recurso.autor.nome }}
+    </a>
+    {% if recurso.data_publicacao %}
+        &middot; {{ recurso.data_publicacao|date:"d/m/Y" }}
+    {% endif %}
+</p>
                     <p>{{ recurso.descricao|truncatewords:30 }}</p>
                 </article>
             {% endfor %}
