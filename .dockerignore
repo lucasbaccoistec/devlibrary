@@ -1,0 +1,32 @@
+# === Ambiente virtual ===
+venv/
+.venv/
+env/
+ENV/
+
+# === Cache do Python ===
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# === Variaveis de ambiente ===
+.env
+.env.local
+
+# === Git ===
+.git/
+.gitignore
+
+# === Base de dados local ===
+*.sqlite3
+db.sqlite3-journal
+
+# === IDEs e editores ===
+.vscode/
+.idea/
+.DS_Store
+
+# === Outros ===
+*.log
+README.md
